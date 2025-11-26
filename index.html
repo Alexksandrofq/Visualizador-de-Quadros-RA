@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Visualizador de Quadros RA</title>
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.4.5/aframe/build/aframe-ar.min.js"></script>
+  <style>
+    .ui-buttons {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10000;
+    }
+    button {
+      padding: 10px 14px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body style="margin:0; overflow:hidden;">
+
+  <div class="ui-buttons">
+    <button id="btnMoldura">Mudar Moldura</button>
+    <button id="btnTamanho">Mudar Tamanho</button>
+    <button id="btnRotacao">Girar Quadro</button>
+  </div>
+
+  <a-scene embedded arjs="sourceType: webcam; facingMode: environment;">
+    <a-assets>
+      <a-asset-item id="quadro1" src="./Assets/Paintings/FirecrackerNight.glb"></a-asset-item>
+      <a-asset-item id="quadro2" src="./Assets/Paintings/PoorMona.glb"></a-asset-item>
+      <a-asset-item id="quadro3" src="./Assets/Paintings/TheYell.glb"></a-asset-item>
+
+      <a-asset-item id="moldura1" src="./Assets/Frames/DiamondFrame.glb"></a-asset-item>
+      <a-asset-item id="moldura2" src="./Assets/Frames/GoldenFrame.glb"></a-asset-item>
+      <a-asset-item id="moldura3" src="./Assets/Frames/SilverFrame.glb"></a-asset-item>
+    </a-assets>
+
+    <a-marker preset="hiro">
+      <a-entity class="grupoQuadro" position="0 0 0.5" rotation="180 0 0" scale="0.3 0.3 0.3">
+        <a-entity class="quadroEntity" gltf-model="#quadro1"></a-entity>
+        <a-entity class="molduraEntity" gltf-model="#moldura1"></a-entity>
+      </a-entity>
+    </a-marker>
+
+    <a-marker preset="kanji">
+      <a-entity class="grupoQuadro" position="0 0 0.5" rotation="180 0 0" scale="0.3 0.3 0.3">
+        <a-entity class="quadroEntity" gltf-model="#quadro2"></a-entity>
+        <a-entity class="molduraEntity" gltf-model="#moldura1"></a-entity>
+      </a-entity>
+    </a-marker>
+
+    <a-marker type="pattern" url="./Assets/Markers/pattern-marker3.patt">
+      <a-entity class="grupoQuadro" position="0 0 0.5" rotation="180 0 0" scale="0.3 0.3 0.3">
+        <a-entity class="quadroEntity" gltf-model="#quadro3"></a-entity>
+        <a-entity class="molduraEntity" gltf-model="#moldura1"></a-entity>
+      </a-entity>
+    </a-marker>
+
+    <a-entity camera></a-entity>
+  </a-scene>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const btnMoldura = document.getElementById('btnMoldura');
+      const btnTamanho = document.getElementById('btnTamanho');
+      const btnRotacao = document.getElementById('btnRotacao');
+
+      const grupos = document.querySelectorAll('.grupoQuadro');
+      const moldurasEntities = document.querySelectorAll('.molduraEntity');
+
+      const molduras = ['#moldura1', '#moldura2', '#moldura3'];
+      let idxMoldura = 0;
+
+      function nextMoldura() {
+        idxMoldura = (idxMoldura + 1) % molduras.length;
+        moldurasEntities.forEach(m => {
+          m.removeAttribute('gltf-model');
+          m.setAttribute('gltf-model', molduras[idxMoldura]);
+        });
+      }
+
+      const escalas = ['0.3 0.3 0.3', '0.5 0.5 0.5', '0.7 0.7 0.7'];
+      let idxEscala = 0;
+
+      function nextTamanho() {
+        idxEscala = (idxEscala + 1) % escalas.length;
+        grupos.forEach(g => g.setAttribute('scale', escalas[idxEscala]));
+      }
+
+      let rotY = 0;
+      function girarQuadro() {
+        rotY = (rotY + 45) % 360;
+        grupos.forEach(g => {
+          const currentRotation = g.getAttribute('rotation') || { x: 180, y: 0, z: 0 };
+          g.setAttribute('rotation', `${currentRotation.x} ${rotY} ${currentRotation.z}`);
+        });
+      }
+
+      btnMoldura.addEventListener('click', nextMoldura);
+      btnTamanho.addEventListener('click', nextTamanho);
+      btnRotacao.addEventListener('click', girarQuadro);
+    });
+  </script>
+</body>
+</html>
