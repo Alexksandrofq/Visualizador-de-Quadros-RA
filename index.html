@@ -14,7 +14,7 @@
 
     .ui-buttons {
       position: fixed;
-      bottom: 100px; 
+      bottom: 100px; /* sobe os botões acima da faixa AR */
       left: 50%;
       transform: translateX(-50%);
       display: flex;
@@ -22,29 +22,32 @@
       gap: 10px;
       z-index: 9999;
       pointer-events: auto;
+      width: 90%;          /* ocupa quase toda a largura */
+      max-width: 500px;    /* limite em telas grandes */
     }
 
-     button {
-      flex: 1;
-      padding: 16px 20px;  
-      font-size: 18px;      
+    button {
+      flex: 1;             /* cada botão ocupa espaço proporcional */
+      padding: 16px 20px;  /* aumenta área interna */
+      font-size: 18px;     /* texto maior */
       cursor: pointer;
       border: none;
-      border-radius: 8px;   
+      border-radius: 8px;
       background: #222;
       color: #fff;
     }
 
-     @media (max-width: 600px) {
-    button {
-      width: 100%;        
-      font-size: 20px;   
-      padding: 18px;     
-    }
-  }
+    /* Responsividade para celular */
+    @media (max-width: 600px) {
+      .ui-buttons {
+        flex-direction: column; /* empilha os botões */
+        bottom: 80px;           /* sobe um pouco */
+        width: 95%;             /* ocupa quase toda a largura */
+      }
       button {
-        width: 100%;
-        font-size: 16px;
+        width: 100%;            /* botão ocupa toda a linha */
+        font-size: 20px;        /* texto maior no celular */
+        padding: 18px;          /* mais espaço interno */
       }
     }
 
@@ -62,7 +65,7 @@
     <button id="btnRotacao">Girar Quadro</button>
   </div>
 
-  <a-scene embedded arjs="sourceType: webcam; facingMode: environment;">
+  <a-scene embedded arjs="sourceType: webcam; facingMode: environment;" vr-mode-ui="enabled: false">
     <a-assets>
       <a-asset-item id="quadro1" src="./Assets/Paintings/FirecrackerNight.glb"></a-asset-item>
       <a-asset-item id="quadro2" src="./Assets/Paintings/PoorMona.glb"></a-asset-item>
@@ -141,5 +144,3 @@
   </script>
 </body>
 </html>
-
-
