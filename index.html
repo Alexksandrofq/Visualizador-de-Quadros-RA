@@ -14,7 +14,7 @@
 
     .ui-buttons {
       position: fixed;
-      bottom: 20px;
+      bottom: 100px; 
       left: 50%;
       transform: translateX(-50%);
       display: flex;
@@ -22,8 +22,6 @@
       gap: 10px;
       z-index: 9999;
       pointer-events: auto;
-      width: 90%;
-      max-width: 400px;
     }
 
     button {
@@ -88,7 +86,7 @@
       </a-entity>
     </a-marker>
 
-    <a-marker type="pattern" url="pattern-m">
+    <a-marker type="pattern" url="pattern-marker.patt">
       <a-entity class="grupoQuadro" position="0 0 0.5" rotation="180 0 0" scale="0.3 0.3 0.3">
         <a-entity class="quadroEntity" gltf-model="#quadro3"></a-entity>
         <a-entity class="molduraEntity" gltf-model="#moldura1"></a-entity>
