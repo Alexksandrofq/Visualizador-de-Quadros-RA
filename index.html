@@ -31,6 +31,7 @@
     <button id="btnRotacao">Girar Quadro</button>
   </div>
 
+  <!-- Cena AR pedindo câmera traseira -->
   <a-scene embedded arjs="sourceType: webcam; facingMode: environment;">
     <a-assets>
       <a-asset-item id="quadro1" src="./Assets/Paintings/FirecrackerNight.glb"></a-asset-item>
@@ -42,6 +43,7 @@
       <a-asset-item id="moldura3" src="./Assets/Frames/SilverFrame.glb"></a-asset-item>
     </a-assets>
 
+    <!-- Marcador 1 -->
     <a-marker preset="hiro">
       <a-entity class="grupoQuadro" position="0 0 0.5" rotation="180 0 0" scale="0.3 0.3 0.3">
         <a-entity class="quadroEntity" gltf-model="#quadro1"></a-entity>
@@ -49,6 +51,7 @@
       </a-entity>
     </a-marker>
 
+    <!-- Marcador 2 -->
     <a-marker preset="kanji">
       <a-entity class="grupoQuadro" position="0 0 0.5" rotation="180 0 0" scale="0.3 0.3 0.3">
         <a-entity class="quadroEntity" gltf-model="#quadro2"></a-entity>
@@ -56,7 +59,8 @@
       </a-entity>
     </a-marker>
 
-    <a-marker type="pattern" url="./Assets/Markers/pattern-marker3.patt">
+    <!-- Marcador 3 -->
+    <a-marker preset="pattern" url="./Assets/Markers/pattern-marker3.patt">
       <a-entity class="grupoQuadro" position="0 0 0.5" rotation="180 0 0" scale="0.3 0.3 0.3">
         <a-entity class="quadroEntity" gltf-model="#quadro3"></a-entity>
         <a-entity class="molduraEntity" gltf-model="#moldura1"></a-entity>
