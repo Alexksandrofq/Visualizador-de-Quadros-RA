@@ -7,23 +7,53 @@
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.4.5/aframe/build/aframe-ar.min.js"></script>
   <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
     .ui-buttons {
       position: fixed;
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
+      flex-wrap: wrap;
       gap: 10px;
-      z-index: 10000;
+      z-index: 9999; /* garante que fique acima do AR */
+      pointer-events: auto;
     }
+
     button {
       padding: 10px 14px;
       font-size: 14px;
       cursor: pointer;
+      border: none;
+      border-radius: 6px;
+      background: #222;
+      color: #fff;
+    }
+
+    /* Responsividade para celular */
+    @media (max-width: 600px) {
+      .ui-buttons {
+        flex-direction: column;
+        bottom: 10px;
+        gap: 8px;
+      }
+      button {
+        width: 100%;
+        font-size: 16px;
+      }
+    }
+
+    /* Evita que o canvas bloqueie cliques */
+    canvas, video {
+      pointer-events: none;
     }
   </style>
 </head>
-<body style="margin:0; overflow:hidden;">
+<body>
 
   <div class="ui-buttons">
     <button id="btnMoldura">Mudar Moldura</button>
@@ -60,7 +90,7 @@
     </a-marker>
 
     <!-- Marcador 3 -->
-    <a-marker preset="pattern" url="./Assets/Markers/pattern-marker3.patt">
+    <a-marker type="pattern" url="pattern-marker.patt">
       <a-entity class="grupoQuadro" position="0 0 0.5" rotation="180 0 0" scale="0.3 0.3 0.3">
         <a-entity class="quadroEntity" gltf-model="#quadro3"></a-entity>
         <a-entity class="molduraEntity" gltf-model="#moldura1"></a-entity>
