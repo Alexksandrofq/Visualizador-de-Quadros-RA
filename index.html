@@ -14,7 +14,7 @@
 
     .ui-buttons {
       position: fixed;
-      bottom: 100px; /* sobe os botões acima da faixa AR */
+      bottom: 100px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
@@ -22,14 +22,14 @@
       gap: 10px;
       z-index: 9999;
       pointer-events: auto;
-      width: 90%;          /* ocupa quase toda a largura */
-      max-width: 500px;    /* limite em telas grandes */
+      width: 90%;
+      max-width: 500px;
     }
 
     button {
-      flex: 1;             /* cada botão ocupa espaço proporcional */
-      padding: 16px 20px;  /* aumenta área interna */
-      font-size: 18px;     /* texto maior */
+      flex: 1;
+      padding: 16px 20px;
+      font-size: 18px;
       cursor: pointer;
       border: none;
       border-radius: 8px;
@@ -37,17 +37,16 @@
       color: #fff;
     }
 
-    /* Responsividade para celular */
     @media (max-width: 600px) {
       .ui-buttons {
-        flex-direction: column; /* empilha os botões */
-        bottom: 80px;           /* sobe um pouco */
-        width: 95%;             /* ocupa quase toda a largura */
+        flex-direction: column;
+        bottom: 80px;
+        width: 95%;
       }
       button {
-        width: 100%;            /* botão ocupa toda a linha */
-        font-size: 20px;        /* texto maior no celular */
-        padding: 18px;          /* mais espaço interno */
+        width: 100%;
+        font-size: 20px;
+        padding: 18px;
       }
     }
 
@@ -76,28 +75,32 @@
       <a-asset-item id="moldura3" src="./Assets/Frames/SilverFrame.glb"></a-asset-item>
     </a-assets>
 
+    <!-- Marcador 1 -->
     <a-marker preset="hiro">
-      <a-entity class="grupoQuadro" position="0 0 0.5" rotation="180 0 0" scale="0.3 0.3 0.3">
+      <a-entity class="grupoQuadro" position="0 0 1" rotation="180 0 0" scale="0.2 0.2 0.2">
         <a-entity class="quadroEntity" gltf-model="#quadro1"></a-entity>
         <a-entity class="molduraEntity" gltf-model="#moldura1"></a-entity>
       </a-entity>
     </a-marker>
 
+    <!-- Marcador 2 -->
     <a-marker preset="kanji">
-      <a-entity class="grupoQuadro" position="0 0 0.5" rotation="180 0 0" scale="0.3 0.3 0.3">
+      <a-entity class="grupoQuadro" position="0 0 1" rotation="180 0 0" scale="0.2 0.2 0.2">
         <a-entity class="quadroEntity" gltf-model="#quadro2"></a-entity>
         <a-entity class="molduraEntity" gltf-model="#moldura1"></a-entity>
       </a-entity>
     </a-marker>
 
+    <!-- Marcador 3 -->
     <a-marker type="pattern" url="pattern-marker.patt">
-      <a-entity class="grupoQuadro" position="0 0 0.5" rotation="180 0 0" scale="0.3 0.3 0.3">
+      <a-entity class="grupoQuadro" position="0 0 1" rotation="180 0 0" scale="0.2 0.2 0.2">
         <a-entity class="quadroEntity" gltf-model="#quadro3"></a-entity>
         <a-entity class="molduraEntity" gltf-model="#moldura1"></a-entity>
       </a-entity>
     </a-marker>
 
-    <a-entity camera></a-entity>
+    <!-- Câmera com FOV ajustado -->
+    <a-entity camera="fov: 80"></a-entity>
   </a-scene>
 
   <script>
@@ -120,7 +123,7 @@
         });
       }
 
-      const escalas = ['0.3 0.3 0.3', '0.5 0.5 0.5', '0.7 0.7 0.7'];
+      const escalas = ['0.2 0.2 0.2', '0.3 0.3 0.3', '0.4 0.4 0.4'];
       let idxEscala = 0;
 
       function nextTamanho() {
